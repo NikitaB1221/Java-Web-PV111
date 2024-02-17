@@ -19,7 +19,7 @@
 <body style="display: flex; flex-direction: column; justify-content: space-between; min-height: 100vh">
 <nav>
     <div class="nav-wrapper  ">
-        <a href="#" class="brand-logo left">Logo</a>
+        <a href="<%=contextPath%>" class="brand-logo left">Logo</a>
         <ul id="nav-mobile" class="right ">
             <li><a href="<%=contextPath%>/ioc"><i class="material-icons">sync</i>IoC</a></li>
             <li><a href="<%=contextPath%>/privacy">Privacy</a></li>
