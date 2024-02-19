@@ -9,7 +9,7 @@
 %>
 <h1>Зареєструватись на сайті</h1>
 <div class="row">
-    <form class="col s12" method="post">
+    <form class="col s12" method="post" enctype="multipart/form-data">
         <div class="row">
             <div class="input-field col s6">
                 <i class="material-icons prefix">account_circle</i>
@@ -22,28 +22,31 @@
             </div>
             <div class="input-field col s6">
                 <i class="material-icons prefix">phone</i>
-                <input id="icon_telephone" type="tel"  name="user-phone" inputmode="tel">
+                <input id="icon_telephone" type="tel"  name="user-phone" inputmode="tel"
+                       class="<%= (errorMessages.containsKey("user-phone")) ? "invalid" : "" %>" >
                 <label for="icon_telephone">Телефон</label>
                 <span class="helper-text"
-                      data-error="Це необхідне поле"
+                      data-error="<%=errorMessages.getOrDefault("user-phone", "") %>"
                       data-success="Правильно">Мобільний або домашній телефон</span>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s6">
                 <i class="material-icons prefix">lock</i>
-                <input  id="icon_password" type="password" name="user-password" >
+                <input  id="icon_password" type="password" name="user-password"
+                        class="<%= (errorMessages.containsKey("user-password")) ? "invalid" : "" %>">
                 <label for="icon_password">Пароль</label>
                 <span class="helper-text"
-                      data-error="Це необхідне поле"
+                      data-error="<%=errorMessages.getOrDefault("user-password", "") %>"
                       data-success="Припустимо">Придумайте пароль</span>
             </div>
             <div class="input-field col s6">
                 <i class="material-icons prefix">mail</i>
-                <input  id="icon_email" type="tel"  name="user-email">
+                <input  id="icon_email" type="tel"  name="user-email"
+                        class="<%= (errorMessages.containsKey("user-email")) ? "invalid" : "" %>">
                 <label for="icon_email">E-mail</label>
                 <span class="helper-text"
-                      data-error="Це необхідне поле"
+                      data-error="<%=errorMessages.getOrDefault("user-email", "") %>"
                       data-success="Правильно">Адреса електронної пошти</span>
             </div>
         </div>
@@ -51,7 +54,7 @@
             <div class="file-field input-field col s6">
                 <div class="btn indigo">
                     <i class="material-icons">photo</i>
-                    <input type="file">
+                    <input type="file" name="user-avatar">
                 </div>
                 <div class="file-path-wrapper">
                     <input class="file-path validate" type="text" placeholder="Аватарка">
