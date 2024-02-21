@@ -9,15 +9,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc95bbae-e1eb-48d7-9373-8367ba54b9ef" name="Changes" comment="Validation Added">
-      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/services/form_parse/CommonsFormParseService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/services/form_parse/FormParseResult.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/services/form_parse/FormParseService.java" afterDir="false" />
+    <list default="true" id="cc95bbae-e1eb-48d7-9373-8367ba54b9ef" name="Changes" comment="SignUp Demo">
+      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/dal/UserDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/services/kdf/HashKdfService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/services/kdf/KdfService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/ioc/ServiceModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/ioc/ServiceModule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/servlets/SignUpServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/servlets/SignUpServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/signup.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/signup.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +44,7 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -73,6 +73,11 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mariadb"
+    ]
   }
 }]]></component>
   <component name="RunManager">
@@ -187,7 +192,8 @@
       <workItem from="1708007350117" duration="7035000" />
       <workItem from="1708094410126" duration="9305000" />
       <workItem from="1708186850812" duration="2400000" />
-      <workItem from="1708354408405" duration="9256000" />
+      <workItem from="1708354408405" duration="10432000" />
+      <workItem from="1708526562844" duration="9336000" />
     </task>
     <task id="LOCAL-00001" summary="Ah here we go again.">
       <option name="closed" value="true" />
@@ -229,7 +235,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708189007988</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="SignUp Demo">
+      <option name="closed" value="true" />
+      <created>1708364268843</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1708364268843</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -240,7 +254,8 @@
     <MESSAGE value="CodeGen+HashServiceInWeb" />
     <MESSAGE value="Privacy Added" />
     <MESSAGE value="Validation Added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Validation Added" />
+    <MESSAGE value="SignUp Demo" />
+    <option name="LAST_COMMIT_MESSAGE" value="SignUp Demo" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

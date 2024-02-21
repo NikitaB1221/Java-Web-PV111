@@ -3,6 +3,8 @@ package step.learning.servlets;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import org.apache.commons.fileupload.FileItem;
+import step.learning.dal.UserDao;
+import step.learning.entity.User;
 import step.learning.services.form_parse.FormParseResult;
 import step.learning.services.form_parse.FormParseService;
 
@@ -24,10 +26,12 @@ import static java.util.UUID.randomUUID;
 public class SignUpServlet extends HttpServlet {
 
     private final FormParseService formParseService;
+    private final UserDao userDao;
 
     @Inject
-    public SignUpServlet(FormParseService formParseService) {
+    public SignUpServlet(FormParseService formParseService, UserDao userDao) {
         this.formParseService = formParseService;
+        this.userDao = userDao;
     }
 
     @Override
@@ -38,6 +42,7 @@ public class SignUpServlet extends HttpServlet {
             req.setAttribute("errorMessages", errorMessages);
             session.removeAttribute("form-status");
         }
+//        userDao.installTable();
         req.setAttribute("page-body", "signup.jsp");
         req.getRequestDispatcher("WEB-INF/_layout.jsp").forward(req, resp);
     }
@@ -58,28 +63,34 @@ public class SignUpServlet extends HttpServlet {
             return;
         }
         Map<String, String> fields = formParseResult.getFields();
-
+        boolean isValid = true;
         String userName = fields.get("user-name");
         if (userName == null || userName.isEmpty()) {
             errorMessages.put("user-name", "Имя не может быть пустым");
+            isValid = false;
         } else if (!userName.matches("[A-Z][a-z]*")) {
             errorMessages.put("user-name", "Имя должно начинатся с большой буквы");
+            isValid = false;
         }
 
         String userPhone = fields.get("user-phone");
         if (userPhone == null || userPhone.isEmpty()) {
-            errorMessages.put("user-phone", "Не може бути порожнім phone");
+            errorMessages.put("user-phone", "Телефон не может быть пустым");
+            isValid = false;
         }
 
         String userPassword = fields.get("user-password");
         if (userPassword == null || userPassword.isEmpty()) {
-            errorMessages.put("user-password", "Не може бути порожнім password");
+            errorMessages.put("user-password", "Пароль не может быть пустым");
+            isValid = false;
         }
 
         String userEmail = fields.get("user-email");
         if (userEmail == null || userEmail.isEmpty()) {
-            errorMessages.put("user-email", "Не може бути порожнім email");
+            errorMessages.put("user-email", "Имейл не может быть пустым");
+            isValid = false;
         }
+        String savedFilename = null;
 
         if (formParseResult.getFiles().containsKey("user-avatar")) {
             FileItem fileItem = formParseResult.getFiles().get("user-avatar");
@@ -87,11 +98,11 @@ public class SignUpServlet extends HttpServlet {
             int dotPosition = fileName.lastIndexOf(".");
             if (dotPosition == -1) {
                 errorMessages.put("user-avatar", "Файлы без разсширения не допускаются");
+                isValid = false;
             } else {
                 String ext = fileName.substring(dotPosition);
 //                System.out.println(ext);
 
-                String savedFilename;
                 File savedFile;
                 do {
                     savedFilename = UUID.randomUUID() + ext;
@@ -108,6 +119,10 @@ public class SignUpServlet extends HttpServlet {
                     throw new IOException(e);
                 }
             }
+        }
+
+        if (isValid){
+            userDao.signupUser(userName, userPhone, userPassword, userEmail, savedFilename);
         }
 
         session.setAttribute("form-status", errorMessages);
