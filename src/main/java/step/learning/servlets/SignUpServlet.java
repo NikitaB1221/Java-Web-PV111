@@ -19,6 +19,8 @@ import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import static java.util.UUID.randomUUID;
 
@@ -27,15 +29,18 @@ public class SignUpServlet extends HttpServlet {
 
     private final FormParseService formParseService;
     private final UserDao userDao;
+    private final Logger logger;
 
     @Inject
-    public SignUpServlet(FormParseService formParseService, UserDao userDao) {
+    public SignUpServlet(FormParseService formParseService, UserDao userDao, Logger logger) {
         this.formParseService = formParseService;
         this.userDao = userDao;
+        this.logger = logger;
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        logger.log(Level.WARNING,"SignUpServlet.doGet activity registered");
         HttpSession session = req.getSession();
         Map<String, String> errorMessages = (Map<String, String>) session.getAttribute("form-status");
         if (errorMessages != null) {

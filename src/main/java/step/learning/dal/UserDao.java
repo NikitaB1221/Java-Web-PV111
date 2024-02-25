@@ -10,16 +10,20 @@ import java.sql.Connection;
 //import java.sql.Statement;
 import java.sql.*;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Singleton
 public class UserDao {
     private final KdfService kdfService;
     private final Connection dbConnection;
+    private final Logger logger;
 
     @Inject
-    public UserDao(KdfService kdfService, Connection dbConnection) {
+    public UserDao(KdfService kdfService, Connection dbConnection, Logger logger) {
         this.kdfService = kdfService;
         this.dbConnection = dbConnection;
+        this.logger = logger;
     }
 
     public boolean signupUser(String userName, String userPhone, String userPassword, String userEmail, String savedFilename) {
@@ -36,8 +40,7 @@ public class UserDao {
             return true;
         }
         catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-            System.out.println(sql);
+            logger.log(Level.SEVERE, ex.getMessage() + "--" + sql);
             return false;
         }
     }
@@ -58,8 +61,7 @@ public class UserDao {
             statement.executeUpdate(sql);
             return true;
         } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-            System.out.println(sql);
+            logger.log(Level.SEVERE, ex.getMessage() + "--" + sql);
             return false;
         }
     }

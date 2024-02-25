@@ -52,7 +52,7 @@
         </div>
         <div class="row">
             <div class="file-field input-field col s6">
-                <div class="btn indigo">
+                <div class="btn deep-orange lighten-1">
                     <i class="material-icons">photo</i>
                     <input type="file" name="user-avatar">
                 </div>
@@ -61,7 +61,7 @@
                 </div>
             </div>
             <div class="input-field col s6">
-                <button class="btn indigo right"><i class="material-icons left">task_alt</i>Реєстрація</button>
+                <button class="btn deep-orange lighten-1 right"><i class="material-icons left">task_alt</i>Реєстрація</button>
             </div>
         </div>
     </form>
