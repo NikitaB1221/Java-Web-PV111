@@ -4,23 +4,15 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import org.apache.commons.fileupload.FileItem;
 import step.learning.dal.UserDao;
-import step.learning.entity.User;
 import step.learning.services.form_parse.FormParseResult;
 import step.learning.services.form_parse.FormParseService;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.IOException;
+import javax.servlet.http.*;
+import java.io.*;
 import java.text.ParseException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.*;
+import java.util.logging.*;
 
 import static java.util.UUID.randomUUID;
 
@@ -100,28 +92,33 @@ public class SignUpServlet extends HttpServlet {
         if (formParseResult.getFiles().containsKey("user-avatar")) {
             FileItem fileItem = formParseResult.getFiles().get("user-avatar");
             String fileName = fileItem.getName();
-            int dotPosition = fileName.lastIndexOf(".");
-            if (dotPosition == -1) {
-                errorMessages.put("user-avatar", "Файлы без разсширения не допускаются");
-                isValid = false;
-            } else {
-                String ext = fileName.substring(dotPosition);
-//                System.out.println(ext);
+            if (fileName != null && !fileName.isEmpty()) {
+                int dotPosition = fileName.lastIndexOf(".");
+                if (dotPosition == -1) {
+                    errorMessages.put("user-avatar", "Файлы без розширения не допускаються");
+                    isValid = false;
+                } else {
+                    String ext = fileName.substring(dotPosition);
+                    List<String> allowedExtensions = Arrays.asList(".jpg", ".jpeg", ".png", ".gif");
+                    if (!allowedExtensions.contains(ext.toLowerCase())) {
+                        errorMessages.put("user-avatar", "Файл имеет недопустиме розширенние для изображения");
+                        isValid = false;
+                    } else {
+                        File savedFile;
+                        do {
+                            savedFilename = UUID.randomUUID() + ext;
+                            savedFile = new File(
+                                    req.getServletContext().getRealPath("/upload/avatar"),
+                                    savedFilename
+                            );
+                        } while (savedFile.isFile());
 
-                File savedFile;
-                do {
-                    savedFilename = UUID.randomUUID() + ext;
-                    savedFile = new File(
-                            req.getServletContext().getRealPath("/upload/avatar"),
-                            savedFilename
-                    );
-                } while (savedFile.isFile());
-
-                try {
-                    fileItem.write(savedFile);
-                }
-                catch (Exception e) {
-                    throw new IOException(e);
+                        try {
+                            fileItem.write(savedFile);
+                        } catch (Exception e) {
+                            throw new IOException(e);
+                        }
+                    }
                 }
             }
         }

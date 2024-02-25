@@ -9,16 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc95bbae-e1eb-48d7-9373-8367ba54b9ef" name="Changes" comment="SignUp End">
-      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/ioc/LoggerModule.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/appsettings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/logging.properties" afterDir="false" />
+    <list default="true" id="cc95bbae-e1eb-48d7-9373-8367ba54b9ef" name="Changes" comment="Logger">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/dal/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/dal/UserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/ioc/IosContextListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/ioc/IosContextListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/services/Md5HashService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/services/Md5HashService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/services/Sha1HashService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/services/Sha1HashService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/services/form_parse/CommonsFormParseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/services/form_parse/CommonsFormParseService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/servlets/HomeServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/servlets/HomeServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/servlets/SignUpServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/servlets/SignUpServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/_layout.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/_layout.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/signup.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/signup.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -204,7 +202,7 @@
       <workItem from="1708354408405" duration="10432000" />
       <workItem from="1708526562844" duration="10080000" />
       <workItem from="1708699350421" duration="9590000" />
-      <workItem from="1708868259829" duration="304000" />
+      <workItem from="1708868259829" duration="5365000" />
     </task>
     <task id="LOCAL-00001" summary="Ah here we go again.">
       <option name="closed" value="true" />
@@ -262,7 +260,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708537093930</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Logger">
+      <option name="closed" value="true" />
+      <created>1708869317146</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1708869317146</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -275,7 +281,8 @@
     <MESSAGE value="Validation Added" />
     <MESSAGE value="SignUp Demo" />
     <MESSAGE value="SignUp End" />
-    <option name="LAST_COMMIT_MESSAGE" value="SignUp End" />
+    <MESSAGE value="Logger" />
+    <option name="LAST_COMMIT_MESSAGE" value="Logger" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

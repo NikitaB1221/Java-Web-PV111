@@ -1,5 +1,6 @@
 package step.learning.servlets;
 
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import javax.servlet.ServletException;
@@ -11,16 +12,25 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Singleton
 public class HomeServlet extends HttpServlet {
+    private final Logger logger;
+
+    @Inject
+    public HomeServlet(Logger logger) {
+        this.logger = logger;
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try(InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("appsettings.json")){
             System.out.println( readStreamToEnd(inputStream) );
         }
         catch (IOException ex){
-            System.err.println(ex.getMessage());
+            logger.log(Level.SEVERE, ex.getMessage());
         }
 
         req.setAttribute( "page-body", "home.jsp" ) ;

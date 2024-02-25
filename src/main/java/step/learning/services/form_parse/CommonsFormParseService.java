@@ -12,6 +12,8 @@ import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CommonsFormParseService implements FormParseService {
     private final static int MEMORY_LIMIT  = 5 * 1024 * 1024 ;
@@ -19,9 +21,11 @@ public class CommonsFormParseService implements FormParseService {
     private final static int MAX_FORM_SIZE = 10 * 1024 * 1024 ;
 
     private final ServletFileUpload fileUpload ;
+    private final Logger logger ;
 
     @Inject
-    public CommonsFormParseService() {
+    public CommonsFormParseService(Logger logger) {
+        this.logger = logger;
         DiskFileItemFactory fileItemFactory = new DiskFileItemFactory() ;
         fileItemFactory.setSizeThreshold( MEMORY_LIMIT );
         fileItemFactory.setRepository( new File(
@@ -49,8 +53,9 @@ public class CommonsFormParseService implements FormParseService {
                     }
                 }
             }
-            catch (FileUploadException | UnsupportedEncodingException e) {
-                throw new ParseException(e.getMessage(), 0);
+            catch (FileUploadException | UnsupportedEncodingException ex) {
+                logger.log(Level.SEVERE, ex.getMessage());
+                throw new ParseException(ex.getMessage(), 0);
             }
         }
         else {  // x-www-form-urlencoded

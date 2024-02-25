@@ -1,10 +1,21 @@
 package step.learning.services;
 
+import com.google.inject.Inject;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Md5HashService implements HashService {
+    private final Logger logger;
+
+    @Inject
+    public Md5HashService(Logger logger) {
+        this.logger = logger;
+    }
+
     @Override
     public String hash(String input) {
         try {
@@ -17,8 +28,8 @@ public class Md5HashService implements HashService {
             return stringBuilder.toString();
         }
         catch
-        (NoSuchAlgorithmException e) {
-            System.err.println(e.getMessage());
+        (NoSuchAlgorithmException ex) {
+            logger.log(Level.SEVERE, ex.getMessage());
             return null;
         }
     }
