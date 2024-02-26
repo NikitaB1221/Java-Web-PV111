@@ -9,6 +9,7 @@
 <!doctype html>
 <html>
 <head>
+    <meta charset="utf-8"/>
     <!--Import Google Icon Font-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- Compiled and minified CSS -->
@@ -24,6 +25,7 @@
             <li><a href="<%=contextPath%>/ioc"><i class="material-icons">sync</i>IoC</a></li>
             <li><a href="<%=contextPath%>/privacy">Privacy</a></li>
             <li><a href="<%=contextPath%>/signup"><i class="material-icons">person_add</i></a></li>
+            <li><a href="#modal-auth" class="modal-trigger"><i class="material-icons">key</i></a></li>
         </ul>
     </div>
 </nav>
@@ -57,20 +59,35 @@
         </div>
     </div>
 </footer>
-<!-- Modal Trigger --> <a class="waves-effect red lighten-2 btn modal-trigger" href="#modal1">Modal</a>
+<%--<!-- Modal Trigger -->
+<a class="waves-effect red lighten-2 btn modal-trigger" href="#modal1">Modal</a>--%>
 <!-- Modal Structure -->
-<div id="modal1" class="modal">
-    <div class="modal-content"><h4>Modal Header</h4>
-        <p>A bunch of text</p></div>
-    <div class="modal-footer"><a href="#!" class="modal-close waves-effect deep-orange accent-2 btn-flat">Agree</a></div>
+<div id="modal-auth" class="modal">
+    <div class="modal-content"><h4>Аутендификация</h4>
+        <div class="row">
+            <div class="input-field col s6">
+                <i class="material-icons prefix">mail</i>
+                <input  id="auth-email" type="email">
+                <label for="auth-email">E-mail</label>
+                <span class="helper-text"
+                      data-success="Правильно">Введите адресс електронной почты</span>
+            </div>
+            <div class="input-field col s6">
+                <i class="material-icons prefix">lock</i>
+                <input  id="auth-password" type="password">
+                <label for="auth-password">Пароль</label>
+                <span class="helper-text"
+                      data-success="Припустимо">Введите пароль</span>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="modal-close btn-flat grey">Закрыть</button>
+        <button id="auth-button" class="btn-flat deep-orange accent-2 white-text waves-effect">Вход</button>
+    </div>
 </div>
 <!-- Compiled and minified JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var elems = document.querySelectorAll('.modal');
-        M.Modal.init(elems, {});
-    });
-</script>
+<script src="<%= contextPath%>/js/site.js"></script>
 </body>
 </html>

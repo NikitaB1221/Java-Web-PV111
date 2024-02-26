@@ -2,6 +2,7 @@ package step.learning.dal;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import step.learning.entity.User;
 import step.learning.services.kdf.KdfService;
 
 import java.sql.Connection;
@@ -43,6 +44,10 @@ public class UserDao {
             logger.log(Level.SEVERE, ex.getMessage() + "--" + sql);
             return false;
         }
+    }
+
+    public User getUserByCredentials(String email, String password){
+        return null;
     }
 
     public boolean installTable() {
