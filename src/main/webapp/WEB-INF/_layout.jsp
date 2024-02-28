@@ -1,3 +1,4 @@
+<%@ page import="step.learning.entity.User" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%
     String pageBody = (String) request.getAttribute("page-body");
@@ -5,6 +6,7 @@
         pageBody = "home.jsp";   // default page
     }
     String contextPath = request.getContextPath();
+    User user = (User) request.getAttribute("auth-user");
 %>
 <!doctype html>
 <html>
@@ -25,7 +27,11 @@
             <li><a href="<%=contextPath%>/ioc"><i class="material-icons">sync</i>IoC</a></li>
             <li><a href="<%=contextPath%>/privacy">Privacy</a></li>
             <li><a href="<%=contextPath%>/signup"><i class="material-icons">person_add</i></a></li>
-            <li><a href="#modal-auth" class="modal-trigger"><i class="material-icons">key</i></a></li>
+            <% if(user == null) {%>
+                <li><a href="#modal-auth" class="modal-trigger"><i class="material-icons">key</i></a></li>
+            <% } else {%>
+            <li><a href="#"><i class="material-icons">logout</i></a></li>
+            <% } %>
         </ul>
     </div>
 </nav>
@@ -63,18 +69,18 @@
 <a class="waves-effect red lighten-2 btn modal-trigger" href="#modal1">Modal</a>--%>
 <!-- Modal Structure -->
 <div id="modal-auth" class="modal">
-    <div class="modal-content"><h4>Аутендификация</h4>
+    <div class="modal-content"><h4>Аутентификация</h4>
         <div class="row">
             <div class="input-field col s6">
                 <i class="material-icons prefix">mail</i>
-                <input  id="auth-email" type="email">
+                <input id="auth-email" type="email">
                 <label for="auth-email">E-mail</label>
                 <span class="helper-text"
                       data-success="Правильно">Введите адресс електронной почты</span>
             </div>
             <div class="input-field col s6">
                 <i class="material-icons prefix">lock</i>
-                <input  id="auth-password" type="password">
+                <input id="auth-password" type="password">
                 <label for="auth-password">Пароль</label>
                 <span class="helper-text"
                       data-success="Припустимо">Введите пароль</span>
@@ -82,8 +88,11 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button class="modal-close btn-flat grey">Закрыть</button>
-        <button id="auth-button" class="btn-flat deep-orange accent-2 white-text waves-effect">Вход</button>
+        <div class="auth-message"></div>
+        <div>
+            <button class="modal-close btn-flat grey">Закрыть</button>
+            <button id="auth-button" class="btn-flat deep-orange accent-2 white-text waves-effect">Вход</button>
+        </div>
     </div>
 </div>
 <!-- Compiled and minified JavaScript -->

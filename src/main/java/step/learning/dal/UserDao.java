@@ -36,33 +36,46 @@ public class UserDao {
             prep.setString(3, salt);
             prep.setString(4, kdfService.dk(userPassword, salt));
             prep.setString(5, userEmail);
-            prep.setString( 6, savedFilename);
+            prep.setString(6, savedFilename);
             prep.executeUpdate();
             return true;
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             logger.log(Level.SEVERE, ex.getMessage() + "--" + sql);
             return false;
         }
     }
 
-    public User getUserByCredentials(String email, String password){
+    public User getUserByCredentials(String email, String password) {
+        String sql = "SELECT * FROM Users U Where U.email=?";
+        try (PreparedStatement prep = dbConnection.prepareStatement(sql)) {
+            prep.setString(1, email);
+            ResultSet resultSet = prep.executeQuery();
+            if (resultSet.next()) {
+                String salt = resultSet.getString("salt");
+                String dk = resultSet.getString("dk");
+                if (kdfService.dk(password, salt).equals(dk)) {
+                    return new User(resultSet);
+                }
+            }
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, ex.getMessage() + "--" + sql);
+        }
         return null;
     }
 
     public boolean installTable() {
         String sql = "CREATE TABLE Users(" +
-            "id         CHAR(36) PRIMARY KEY DEFAULT( UUID())," +
-            "name       VARCHAR(64)     NOT NULL," +
-            "phone      VARCHAR(16)     NOT NULL," +
-            "salt       CHAR(32)        NOT NULL," +
-            "dk         CHAR(32)        NOT NULL," +
-            "email      VARCHAR(128)    NOT NULL," +
-            "avatar     VARCHAR(64)     NULL" +
+                "id         CHAR(36) PRIMARY KEY DEFAULT( UUID())," +
+                "name       VARCHAR(64)     NOT NULL," +
+                "phone      VARCHAR(16)     NOT NULL," +
+                "salt       CHAR(32)        NOT NULL," +
+                "dk         CHAR(32)        NOT NULL," +
+                "email      VARCHAR(128)    NOT NULL," +
+                "avatar     VARCHAR(64)     NULL" +
                 ")ENGINE INNODB, DEFAULT CHARSET = utf8mb4";
 
 
-        try(Statement statement = dbConnection.createStatement()){
+        try (Statement statement = dbConnection.createStatement()) {
             statement.executeUpdate(sql);
             return true;
         } catch (SQLException ex) {

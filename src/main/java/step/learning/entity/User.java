@@ -1,16 +1,27 @@
 package step.learning.entity;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.UUID;
 
 public class User {
     private UUID id;
     private String name;
     private String phone;
-    private String password;
     private String email;
     private String filename;
     private String passwordSalt;
     private String passwordDk; // Derived Key (https://datatracker.ietf.org/doc/html/rfc2898)
+
+    public User(ResultSet resultSet) throws SQLException {
+        setId(UUID.fromString(resultSet.getString("id")));
+        setName(resultSet.getString("name"));
+        setPhone(resultSet.getString("phone"));
+        setEmail(resultSet.getString("email"));
+        setFilename(resultSet.getString("avatar"));
+        setPasswordSalt(resultSet.getString("salt"));
+        setPasswordDk(resultSet.getString("dk"));
+    }
 
     public UUID getId() {
         return id;
@@ -38,14 +49,6 @@ public class User {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getEmail() {
