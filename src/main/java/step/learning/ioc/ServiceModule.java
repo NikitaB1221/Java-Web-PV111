@@ -4,6 +4,8 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import step.learning.services.HashService;
 import step.learning.services.Md5HashService;
+import step.learning.services.db.DbService;
+import step.learning.services.db.MariaDbService;
 import step.learning.services.form_parse.*;
 import step.learning.services.kdf.*;
 import step.learning.services.rnd.*;
@@ -17,6 +19,7 @@ public class ServiceModule extends AbstractModule implements AutoCloseable{
         bind(CodeGen.class).to(AlphaNumericCodeGen.class);
         bind(FormParseService.class).to(CommonsFormParseService.class);
         bind(KdfService.class).to(HashKdfService.class);
+        bind(DbService.class).to(MariaDbService.class);
     }
 
 
