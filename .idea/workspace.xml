@@ -9,13 +9,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc95bbae-e1eb-48d7-9373-8367ba54b9ef" name="Changes" comment="SignIn -- End">
-      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/services/db/DbService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/services/db/MariaDbService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/appsettings-sample.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="cc95bbae-e1eb-48d7-9373-8367ba54b9ef" name="Changes" comment="DB -- 2">
+      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/filters/DbFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/ioc/ServiceModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/ioc/ServiceModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/dal/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/dal/UserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/filters/AuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/filters/AuthFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/ioc/RouterModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/ioc/RouterModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/services/db/MariaDbService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/services/db/MariaDbService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/servlets/HomeServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/servlets/HomeServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/appsettings-sample.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/appsettings-sample.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,8 +28,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Jsp File" />
         <option value="Interface" />
+        <option value="Jsp File" />
         <option value="Class" />
       </list>
     </option>
@@ -42,7 +45,7 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -83,6 +86,9 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\JavaProjects\Java-Web-PV111\src\main\resources" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\JavaProjects\Java-Web-PV111\src\main\webapp" />
     </key>
   </component>
   <component name="RunManager">
@@ -203,7 +209,8 @@
       <workItem from="1708868259829" duration="5399000" />
       <workItem from="1708959523401" duration="8691000" />
       <workItem from="1709132112705" duration="9073000" />
-      <workItem from="1709304787431" duration="1562000" />
+      <workItem from="1709304787431" duration="8860000" />
+      <workItem from="1709469110721" duration="3815000" />
     </task>
     <task id="LOCAL-00001" summary="Ah here we go again.">
       <option name="closed" value="true" />
@@ -293,7 +300,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709141937353</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="DB -- 1">
+      <option name="closed" value="true" />
+      <created>1709306520719</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1709306520719</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -310,7 +325,9 @@
     <MESSAGE value="LoggerInUse+5Users+AvatarValidate" />
     <MESSAGE value="SignIn" />
     <MESSAGE value="SignIn -- End" />
-    <option name="LAST_COMMIT_MESSAGE" value="SignIn -- End" />
+    <MESSAGE value="DB -- 1" />
+    <MESSAGE value="DB -- 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="DB -- 2" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
