@@ -26,6 +26,7 @@
         <ul id="nav-mobile" class="right ">
             <li><a href="<%=contextPath%>/ioc"><i class="material-icons">sync</i>IoC</a></li>
             <li><a href="<%=contextPath%>/privacy">Privacy</a></li>
+            <li><a href="<%=contextPath%>/news">News</a></li>
             <li><a href="<%=contextPath%>/signup"><i class="material-icons">person_add</i></a></li>
             <% if(user == null) {%>
             <li><a href="#modal-auth" class="modal-trigger"><i class="material-icons">key</i></a></li>
@@ -36,7 +37,7 @@
                          alt="User Avatar" class="avatar">
                 </a>
             </li>
-            <li><a href="<%=contextPath%>/logout"><i class="material-icons">logout</i></a></li>
+            <li><a href="<%=contextPath%>?logout"><i class="material-icons">logout</i></a></li>
             <% } %>
 
         </ul>

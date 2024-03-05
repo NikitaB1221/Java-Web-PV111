@@ -9,10 +9,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc95bbae-e1eb-48d7-9373-8367ba54b9ef" name="Changes" comment="DeepAuthValid+FiltersUpdate">
+    <list default="true" id="cc95bbae-e1eb-48d7-9373-8367ba54b9ef" name="Changes" comment="AvatarReveal">
+      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/dal/NewsDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/entity/News.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/servlets/NewsServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/news.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/filters/AuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/filters/AuthFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/ioc/RouterModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/ioc/RouterModule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/_layout.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/_layout.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/site.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/site.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/static.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,6 +88,7 @@
       <recent name="E:\JavaProjects\Java-Web-PV111\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\JavaProjects\Java-Web-PV111\src\main\webapp\img" />
       <recent name="E:\JavaProjects\Java-Web-PV111\src\main\webapp" />
     </key>
   </component>
@@ -204,7 +211,9 @@
       <workItem from="1708959523401" duration="8691000" />
       <workItem from="1709132112705" duration="9073000" />
       <workItem from="1709304787431" duration="8860000" />
-      <workItem from="1709469110721" duration="6837000" />
+      <workItem from="1709469110721" duration="10985000" />
+      <workItem from="1709555439502" duration="11362000" />
+      <workItem from="1709576660955" duration="1753000" />
     </task>
     <task id="LOCAL-00001" summary="Ah here we go again.">
       <option name="closed" value="true" />
@@ -310,7 +319,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709473011684</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="AvatarReveal">
+      <option name="closed" value="true" />
+      <created>1709476235409</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1709476235409</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -330,7 +347,8 @@
     <MESSAGE value="DB -- 1" />
     <MESSAGE value="DB -- 2" />
     <MESSAGE value="DeepAuthValid+FiltersUpdate" />
-    <option name="LAST_COMMIT_MESSAGE" value="DeepAuthValid+FiltersUpdate" />
+    <MESSAGE value="AvatarReveal" />
+    <option name="LAST_COMMIT_MESSAGE" value="AvatarReveal" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

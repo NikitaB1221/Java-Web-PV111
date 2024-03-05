@@ -8,7 +8,7 @@ import step.learning.servlets.*;
 public class RouterModule extends ServletModule {
     @Override
     protected void configureServlets() {
-        filter("/*").through(DbFilter.class);
+        filterRegex("^/(?!css/.+|js/.+|img/.+).*$").through(DbFilter.class);
         filter("/*").through(AuthFilter.class);
 
         serve("/").with(HomeServlet.class);
@@ -16,6 +16,7 @@ public class RouterModule extends ServletModule {
         serve("/signup").with(SignUpServlet.class);
         serve("/auth").with(AuthServlet.class);
         serve("/privacy").with(PrivacyServlet.class);
+        serve("/news").with(NewsServlet.class);
 
     }
 }

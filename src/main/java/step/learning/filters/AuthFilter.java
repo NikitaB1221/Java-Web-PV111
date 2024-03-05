@@ -6,6 +6,7 @@ import step.learning.entity.User;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -33,6 +34,11 @@ public class AuthFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("auth-user");
+        if(req.getParameterMap().containsKey("logout")) {
+            session.removeAttribute("auth-user");
+            ((HttpServletResponse)response).sendRedirect(((HttpServletRequest) request).getRequestURI());
+            return;
+        }
         if( user != null ) {
             req.setAttribute("auth-user", user);
             logger.log(Level.INFO, "AuthFilter: user authorized");
