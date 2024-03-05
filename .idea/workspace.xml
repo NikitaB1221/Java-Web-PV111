@@ -9,16 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc95bbae-e1eb-48d7-9373-8367ba54b9ef" name="Changes" comment="AvatarReveal">
-      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/dal/NewsDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/entity/News.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/servlets/NewsServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/news.jsp" afterDir="false" />
+    <list default="true" id="cc95bbae-e1eb-48d7-9373-8367ba54b9ef" name="Changes" comment="FilterUpdate">
+      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/filters/EncodingFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/filters/AuthFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/filters/AuthFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/ioc/RouterModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/ioc/RouterModule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/_layout.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/_layout.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -214,6 +208,7 @@
       <workItem from="1709469110721" duration="10985000" />
       <workItem from="1709555439502" duration="11362000" />
       <workItem from="1709576660955" duration="1753000" />
+      <workItem from="1709646528559" duration="3537000" />
     </task>
     <task id="LOCAL-00001" summary="Ah here we go again.">
       <option name="closed" value="true" />
@@ -327,7 +322,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709476235409</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="FilterUpdate">
+      <option name="closed" value="true" />
+      <created>1709646666279</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1709646666279</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -348,7 +351,8 @@
     <MESSAGE value="DB -- 2" />
     <MESSAGE value="DeepAuthValid+FiltersUpdate" />
     <MESSAGE value="AvatarReveal" />
-    <option name="LAST_COMMIT_MESSAGE" value="AvatarReveal" />
+    <MESSAGE value="FilterUpdate" />
+    <option name="LAST_COMMIT_MESSAGE" value="FilterUpdate" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
