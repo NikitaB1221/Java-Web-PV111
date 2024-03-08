@@ -2,10 +2,12 @@ package step.learning.dal;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import step.learning.entity.News;
 import step.learning.services.db.DbService;
 
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,4 +41,38 @@ public class NewsDao {
         }
         return false;
     }
+
+    public List<News> getAll(){
+        List<News> ret = new ArrayList<>();
+        String sql = "SELECT * FROM News";
+        try(Statement statement = dbService.getConnection().createStatement()) {
+            ResultSet res = statement.executeQuery(sql);
+            while (res.next()){
+                ret.add(News.FromResultSet(res));
+            }
+        }
+        catch (SQLException ex) {
+            logger.log(Level.SEVERE, ex.getMessage() + " -- " + sql );
+        }
+        return ret;
+    }
+
+    public boolean addNews (News news) {
+        String sql = "INSERT INTO News(id, title, spoiler, text, image_url, created_dt)" +
+                "VALUES( UUID(), ?, ?, ?, ?, ?)";
+        try ( PreparedStatement prep = dbService.getConnection().prepareStatement(sql) ) {
+            prep.setString(1, news.getTitle());
+            prep.setString(2, news.getSpoiler());
+            prep.setString(3, news.getText());
+            prep.setString(4, news.getImageUrl());
+            prep.setTimestamp(5, new Timestamp(news.getCreateDt().getTime()));
+            prep.executeUpdate();
+            return true;
+        }
+        catch(SQLException ex) {
+            logger.log( Level.SEVERE, ex.getMessage() + "--" + sql);
+        }
+        return false;
+    }
+
 }

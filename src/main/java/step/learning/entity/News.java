@@ -1,5 +1,8 @@
 package step.learning.entity;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.UUID;
 
@@ -12,6 +15,23 @@ public class News {
     private Date createDt;
     private Date deleteDt;
 
+    public static  News FromResultSet(ResultSet resultSet) throws SQLException {
+        News ret = new News();
+        ret.setId(UUID.fromString(resultSet.getString("id")));
+        ret.setTitle(resultSet.getString("title"));
+        ret.setSpoiler(resultSet.getString("spoiler"));
+        ret.setText(resultSet.getString("text"));
+        ret.setImageUrl(resultSet.getString("image_url"));
+        Timestamp timestamp = resultSet.getTimestamp("created_dt");
+        if (timestamp != null){
+            ret.setCreateDt(new Date(timestamp.getTime()));
+        }
+        timestamp = resultSet.getTimestamp("deleted_dt");
+        if (timestamp != null){
+            ret.setDeleteDt(new Date(timestamp.getTime()));
+        }
+        return ret;
+    }
     public UUID getId() {
         return id;
     }
