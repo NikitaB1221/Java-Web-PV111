@@ -2,11 +2,13 @@
 <%@ page import="java.util.List" %>
 <%@ page import="step.learning.entity.News" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="step.learning.dal.NewsDao" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%
     String contextPath = request.getContextPath();
     User user = (User) request.getAttribute("auth-user");
     List<News> news = (List<News>) request.getAttribute("news");
+    NewsDao nDO = (NewsDao) request.getAttribute("newsDaoObj");
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 %>
 <h1>Новини</h1>
@@ -17,23 +19,34 @@
         <div class="card-image" style="flex: 1">
             <img src="<%=contextPath%>/upload/news/<%=n.getImageUrl()%>" alt="img"/>
         </div>
+        <div>
+            <%
+                User author = nDO.getAuthorById(n.getAuthor_id());
+            %>
+            <img src="<%= author != null && author.getFilename() != null ? contextPath + "/upload/avatar/" + author.getFilename() : contextPath + "/upload/avatar/NoImage.png" %>"
+                 alt="User Avatar" class="avatar">
+            <i><%= author != null ? author.getName() : "OIN"%>
+            </i>
+        </div>
         <div class="card-stacked" style="flex: 3">
             <div class="card-content">
-                <h5><%=n.getTitle()%></h5>
-                <p><%=n.getCreateDt()%></p>
+                <h5><%=n.getTitle()%>
+                </h5>
+                <p><%=n.getCreateDt()%>
+                </p>
                 <small>
                     <%=n.getSpoiler()%>
                 </small>
             </div>
             <div class="card-action">
-                <a href="/<%=contextPath%>/news/<%=n.getId()%>">Reed more...</a>
+                <a href="<%=contextPath%>/news/<%=n.getId()%>">Reed more...</a>
             </div>
         </div>
     </div>
 </div>
 <% } %>
 
-<% if(user != null) { %>
+<% if (user != null) { %>
 
 <p>
     Контроль таблицы: <%= request.getAttribute("create-status") %>
@@ -50,7 +63,7 @@
                     <input id="news-file-path" class="file-path validate" type="text">
                 </div>
             </div>
-            <img id="news-image-preview" style="width: 100%" src="<%=contextPath%>/upload/news/no-image.jpg" alt="img" />
+            <img id="news-image-preview" style="width: 100%" src="<%=contextPath%>/upload/news/no-image.jpg" alt="img"/>
         </div>
         <div class="col s8">
             <div class="input-field row">
@@ -77,7 +90,7 @@
             <label for="news-text">Textarea</label>
         </div>
     </div>
-
+    <input type="hidden" id="author-id" value="<%=user.getId()%>">
     <div class="row">
         <button id="news-submit" class="btn red accent-2 right">Опубликовать</button>
     </div>

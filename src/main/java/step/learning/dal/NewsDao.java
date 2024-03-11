@@ -3,11 +3,14 @@ package step.learning.dal;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import step.learning.entity.News;
+import step.learning.entity.User;
 import step.learning.services.db.DbService;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,59 +21,104 @@ public class NewsDao {
     private final Logger logger;
 
     @Inject
-    public NewsDao (DbService dbService, Logger logger) {
+    public NewsDao(DbService dbService, Logger logger) {
         this.dbService = dbService;
         this.logger = logger;
     }
+
     public boolean installTable() {
-        String sql = "CREATE TABLE IF NOT EXISTS News(" +
-                "id         CHAR(36)     PRIMARY KEY DEFAULT( UUID() )," +
-                "title      VARCHAR(256) NOT NULL," +
-                "spoiler    VARCHAR(512) NOT NULL," +
-                "text       TEXT         NOT NULL," +
-                "image_url  VARCHAR(256) NOT NULL," +
-                "created_dt DATETIME     NOT NULL  DEFAULT CURRENT_TIMESTAMP," +
-                "deleted_dt DATETIME     NULL" +
-                ") ENGINE = InnoDB, DEFAULT CHARSET = utf8mb4";
-        try(Statement statement = dbService.getConnection().createStatement()) {
-            statement.executeUpdate( sql ) ;
-            return true;
+        String sql = "CREATE TABLE IF NOT EXISTS News(" + "id         CHAR(36)     PRIMARY KEY DEFAULT( UUID() )," + "title      VARCHAR(256) NOT NULL," + "spoiler    VARCHAR(512) NOT NULL," + "text       TEXT         NOT NULL," + "image_url  VARCHAR(256) NOT NULL," + "created_dt DATETIME     NOT NULL  DEFAULT CURRENT_TIMESTAMP," + "deleted_dt DATETIME     NULL" + ") ENGINE = InnoDB, DEFAULT CHARSET = utf8mb4";
+        try (Statement statement = dbService.getConnection().createStatement()) {
+
+            statement.executeUpdate(sql);
+            ResultSet rs = statement.executeQuery("SHOW COLUMNS FROM News LIKE 'author_id'");
+            if (!rs.next()) {
+                statement.executeUpdate("ALTER TABLE News ADD COLUMN author_id CHAR(36) NOT NULL ");
             }
-        catch (SQLException ex) {
-            logger.log(Level.SEVERE, ex.getMessage() + " -- " + sql );
+
+            return true;
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, ex.getMessage() + " -- " + sql);
         }
         return false;
     }
 
-    public List<News> getAll(){
+    public User getAuthorById(UUID id) {
+        String sql = "SELECT * FROM Users WHERE id = ? LIMIT 1";
+
+        try (Connection conn = dbService.getConnection(); PreparedStatement prep = conn.prepareStatement(sql)) {
+            prep.setString(1, id.toString());
+            ResultSet resultSet = prep.executeQuery();
+            return resultSet.next() ? new User(resultSet) : null;
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, ex.getMessage() + " -- " + sql);
+            return null;
+        }
+    }
+
+    public News getById( String id ) {
+        String sql = "SELECT * FROM News WHERE id=?" ;
+        try( PreparedStatement prep = dbService.getConnection().prepareStatement(sql) ) {
+            prep.setString(1, id);
+            ResultSet res = prep.executeQuery();
+            return res.next() ?  News.FromResultSet(res) : null ;
+        }
+        catch( SQLException ex ) {
+            logger.log( Level.SEVERE, ex.getMessage() + " -- " + sql );
+        }
+        return null ;
+    }
+
+    public List<News> getAll() {
         List<News> ret = new ArrayList<>();
         String sql = "SELECT * FROM News";
-        try(Statement statement = dbService.getConnection().createStatement()) {
+        try (Statement statement = dbService.getConnection().createStatement()) {
             ResultSet res = statement.executeQuery(sql);
-            while (res.next()){
+            while (res.next()) {
                 ret.add(News.FromResultSet(res));
             }
-        }
-        catch (SQLException ex) {
-            logger.log(Level.SEVERE, ex.getMessage() + " -- " + sql );
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, ex.getMessage() + " -- " + sql);
         }
         return ret;
     }
 
-    public boolean addNews (News news) {
-        String sql = "INSERT INTO News(id, title, spoiler, text, image_url, created_dt)" +
-                "VALUES( UUID(), ?, ?, ?, ?, ?)";
-        try ( PreparedStatement prep = dbService.getConnection().prepareStatement(sql) ) {
+    public boolean addNews(News news) {
+        // Валідація даних
+        if (news.getTitle().length() < 10) {
+            logger.log(Level.SEVERE, "Назва повинна містити не менше 10 символів");
+            return false;
+        }
+        if (news.getSpoiler().split(" ").length < 10) {
+            logger.log(Level.SEVERE, "Анонс повинен містити не менше 10 слів");
+            return false;
+        }
+        if (news.getCreateDt() == null) {
+            //            logger.log(Level.SEVERE, "Дата не може бути null");
+            //            return false;
+            news.setCreateDt(new Date());
+        }
+        if (news.getText().length() < 300) {
+            logger.log(Level.SEVERE, "Контент повинен містити не менше 300 символів");
+            return false;
+        }
+        if (!news.getImageUrl().matches(".*\\.(jpg|png|gif|bmp)$")) {
+            logger.log(Level.SEVERE, "Файл-картинка повинен мати графічний тип (розширення файлу)");
+            return false;
+        }
+
+        String sql = "INSERT INTO News(id, title, spoiler, text, image_url, created_dt, author_id)" + "VALUES( UUID(), ?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement prep = dbService.getConnection().prepareStatement(sql)) {
             prep.setString(1, news.getTitle());
             prep.setString(2, news.getSpoiler());
             prep.setString(3, news.getText());
             prep.setString(4, news.getImageUrl());
             prep.setTimestamp(5, new Timestamp(news.getCreateDt().getTime()));
+            prep.setString(6, news.getAuthor_id().toString());
             prep.executeUpdate();
             return true;
-        }
-        catch(SQLException ex) {
-            logger.log( Level.SEVERE, ex.getMessage() + "--" + sql);
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, ex.getMessage() + "--" + sql);
         }
         return false;
     }

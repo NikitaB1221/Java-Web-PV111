@@ -48,6 +48,7 @@ public class UserDao {
         return null;
     }
 
+
     public boolean signupUser(String userName, String userPhone, String userPassword, String userEmail, String savedFilename) {
         String sql = "INSERT INTO Users(name,phone,salt,dk,email,avatar) VALUES(?,?,?,?,?,?)" ;
         try(PreparedStatement prep = dbService.getConnection().prepareStatement(sql)) {
@@ -70,7 +71,7 @@ public class UserDao {
     }
 
     public boolean installTable() {
-        String sql = "CREATE TABLE Users(" +
+        String sql = "CREATE TABLE IF NOT EXISTS Users(" +
                 "id     CHAR(36)     PRIMARY KEY DEFAULT( UUID() )," +
                 "name   VARCHAR(64)  NOT NULL," +
                 "phone  VARCHAR(16)  NOT NULL," +

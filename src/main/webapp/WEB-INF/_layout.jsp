@@ -5,6 +5,7 @@
     if (pageBody == null) {
         pageBody = "home.jsp";   // default page
     }
+    pageBody = "/WEB-INF/" + pageBody;
     String contextPath = request.getContextPath();
     User user = (User) request.getAttribute("auth-user");
 %>

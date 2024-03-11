@@ -14,6 +14,15 @@ public class News {
     private String imageUrl;
     private Date createDt;
     private Date deleteDt;
+    private UUID author_id;
+
+    public UUID getAuthor_id() {
+        return author_id;
+    }
+
+    public void setAuthor_id(UUID author_id) {
+        this.author_id = author_id;
+    }
 
     public static  News FromResultSet(ResultSet resultSet) throws SQLException {
         News ret = new News();
@@ -30,6 +39,7 @@ public class News {
         if (timestamp != null){
             ret.setDeleteDt(new Date(timestamp.getTime()));
         }
+        ret.setAuthor_id(UUID.fromString(resultSet.getString("author_id")));
         return ret;
     }
     public UUID getId() {

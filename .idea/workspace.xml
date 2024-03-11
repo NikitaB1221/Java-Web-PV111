@@ -9,10 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc95bbae-e1eb-48d7-9373-8367ba54b9ef" name="Changes" comment="News">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/upload/news/no-image.jpg" afterDir="false" />
+    <list default="true" id="cc95bbae-e1eb-48d7-9373-8367ba54b9ef" name="Changes" comment="NewsUpdateTry">
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/news_detail.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/dal/NewsDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/dal/NewsDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/dal/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/dal/UserDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/entity/News.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/entity/News.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/ioc/RouterModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/ioc/RouterModule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/servlets/AuthServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/servlets/AuthServlet.java" afterDir="false" />
@@ -30,8 +32,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Jsp File" />
         <option value="Class" />
+        <option value="Jsp File" />
       </list>
     </option>
   </component>
@@ -46,7 +48,7 @@
     <option name="CUSTOM_FILTER" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -219,7 +221,13 @@
       <workItem from="1709646528559" duration="3791000" />
       <workItem from="1709655930527" duration="1200000" />
       <workItem from="1709736055689" duration="10048000" />
-      <workItem from="1709909159446" duration="9233000" />
+      <workItem from="1709909159446" duration="9348000" />
+      <workItem from="1710084088813" duration="3460000" />
+      <workItem from="1710092484044" duration="4350000" />
+      <workItem from="1710097226013" duration="6770000" />
+      <workItem from="1710108281574" duration="2105000" />
+      <workItem from="1710167842684" duration="1394000" />
+      <workItem from="1710169315227" duration="7809000" />
     </task>
     <task id="LOCAL-00001" summary="Ah here we go again.">
       <option name="closed" value="true" />
@@ -349,11 +357,30 @@
       <option name="project" value="LOCAL" />
       <updated>1709651947279</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="News">
+      <option name="closed" value="true" />
+      <created>1709919459031</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1709919459031</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Ah here we go again." />
@@ -373,7 +400,8 @@
     <MESSAGE value="FilterUpdate" />
     <MESSAGE value="EncodingFilter" />
     <MESSAGE value="News" />
-    <option name="LAST_COMMIT_MESSAGE" value="News" />
+    <MESSAGE value="NewsUpdateTry" />
+    <option name="LAST_COMMIT_MESSAGE" value="NewsUpdateTry" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
