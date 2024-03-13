@@ -43,19 +43,6 @@ public class NewsDao {
         return false;
     }
 
-    public User getAuthorById(UUID id) {
-        String sql = "SELECT * FROM Users WHERE id = ? LIMIT 1";
-
-        try (Connection conn = dbService.getConnection(); PreparedStatement prep = conn.prepareStatement(sql)) {
-            prep.setString(1, id.toString());
-            ResultSet resultSet = prep.executeQuery();
-            return resultSet.next() ? new User(resultSet) : null;
-        } catch (SQLException ex) {
-            logger.log(Level.SEVERE, ex.getMessage() + " -- " + sql);
-            return null;
-        }
-    }
-
     public News getById( String id ) {
         String sql = "SELECT * FROM News WHERE id=?" ;
         try( PreparedStatement prep = dbService.getConnection().prepareStatement(sql) ) {

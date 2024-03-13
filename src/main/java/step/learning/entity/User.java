@@ -2,6 +2,8 @@ package step.learning.entity;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class User {
@@ -13,6 +15,8 @@ public class User {
     private String passwordSalt;
     private String passwordDk; // Derived Key (https://datatracker.ietf.org/doc/html/rfc2898)
 
+    private List<Role> roles;
+
     public User(ResultSet resultSet) throws SQLException {
         setId(UUID.fromString(resultSet.getString("id")));
         setName(resultSet.getString("name"));
@@ -21,6 +25,18 @@ public class User {
         setFilename(resultSet.getString("avatar"));
         setPasswordSalt(resultSet.getString("salt"));
         setPasswordDk(resultSet.getString("dk"));
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public User includeRoles(ResultSet resultSet) throws SQLException {
+        this.roles = new ArrayList<>();
+        while(resultSet.next()){
+            roles.add(new Role(resultSet));
+        }
+        return this;
     }
 
     public UUID getId() {

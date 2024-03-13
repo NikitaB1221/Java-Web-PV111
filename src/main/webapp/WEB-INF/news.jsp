@@ -3,12 +3,13 @@
 <%@ page import="step.learning.entity.News" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="step.learning.dal.NewsDao" %>
+<%@ page import="step.learning.dal.UserDao" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%
     String contextPath = request.getContextPath();
     User user = (User) request.getAttribute("auth-user");
     List<News> news = (List<News>) request.getAttribute("news");
-    NewsDao nDO = (NewsDao) request.getAttribute("newsDaoObj");
+    UserDao uDO = (UserDao) request.getAttribute("userDaoObj");
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 %>
 <h1>Новини</h1>
@@ -21,7 +22,7 @@
         </div>
         <div>
             <%
-                User author = nDO.getAuthorById(n.getAuthor_id());
+                User author = uDO.getUserById(n.getAuthor_id());
             %>
             <img src="<%= author != null && author.getFilename() != null ? contextPath + "/upload/avatar/" + author.getFilename() : contextPath + "/upload/avatar/NoImage.png" %>"
                  alt="User Avatar" class="avatar">

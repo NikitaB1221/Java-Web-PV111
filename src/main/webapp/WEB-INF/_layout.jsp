@@ -33,7 +33,7 @@
             <li><a href="#modal-auth" class="modal-trigger"><i class="material-icons">key</i></a></li>
             <% } else {%>
             <li>
-                <a href="#">
+                <a href="<%=contextPath%>/profile/<%=user.getId()%>">
                     <img src="<%= user.getFilename() != null ? contextPath + "/upload/avatar/" + user.getFilename() : contextPath + "/upload/avatar/NoImage.png" %>"
                          alt="User Avatar" class="avatar">
                 </a>

@@ -24,12 +24,14 @@ import java.util.logging.Logger;
 
 @Singleton
 public class NewsServlet extends HttpServlet {
+    private final UserDao userDao;
     private final NewsDao newsDao;
     private final FormParseService formParseService;
     private final Logger logger;
 
     @Inject
-    public NewsServlet(UserDao userDao, NewsDao newsDao, FormParseService formParseService, Logger logger) {
+    public NewsServlet(UserDao userDao, NewsDao newsDao, UserDao userDao1, FormParseService formParseService, Logger logger) {
+        this.userDao = userDao1;
         this.newsDao = newsDao;
         this.formParseService = formParseService;
         this.logger = logger;
@@ -44,7 +46,7 @@ public class NewsServlet extends HttpServlet {
         String pathInfo = req.getPathInfo();
         if ("/".equals(pathInfo)){
             req.setAttribute( "news", newsDao.getAll());
-            req.setAttribute( "newsDaoObj", newsDao);
+            req.setAttribute( "userDaoObj", userDao);
             req.setAttribute("page-body", "news.jsp");
         }
         else {
@@ -52,7 +54,7 @@ public class NewsServlet extends HttpServlet {
             if (news != null) {
                 req.setAttribute( "news_detail", news);
             }
-            req.setAttribute( "newsDaoObj", newsDao);
+            req.setAttribute( "userDaoObj", userDao);
             req.setAttribute("page-body", "news_detail.jsp");
         }
 
