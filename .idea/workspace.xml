@@ -9,19 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc95bbae-e1eb-48d7-9373-8367ba54b9ef" name="Changes" comment="SingleNewPreview+AuthorNameAdnAvatarOutput">
-      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/entity/Role.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/step/learning/servlets/ProfileServlet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/profile.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/webContexts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webContexts.xml" afterDir="false" />
+    <list default="true" id="cc95bbae-e1eb-48d7-9373-8367ba54b9ef" name="Changes" comment="RolesAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/dal/NewsDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/dal/NewsDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/dal/UserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/dal/UserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/ioc/RouterModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/ioc/RouterModule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/servlets/NewsServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/servlets/NewsServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/_layout.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/_layout.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/news.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/news.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/js/site.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/site.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,32 +53,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Tomcat Server.Tomcat 8.5.98.executor&quot;: &quot;Run&quot;,
-    &quot;Tomcat Server.index.jsp.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/JavaProjects/Java-Web-PV111/src/main/webapp/upload/news&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Tomcat Server.Tomcat 8.5.98.executor": "Run",
+    "Tomcat Server.index.jsp.executor": "Run",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/JavaProjects/Java-Web-PV111/src/main/webapp/upload/news",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mariadb&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mariadb"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\JavaProjects\Java-Web-PV111\src\main\webapp\upload\news" />
@@ -228,7 +221,8 @@
       <workItem from="1710108281574" duration="2105000" />
       <workItem from="1710167842684" duration="1394000" />
       <workItem from="1710169315227" duration="8273000" />
-      <workItem from="1710341712840" duration="8690000" />
+      <workItem from="1710341712840" duration="9162000" />
+      <workItem from="1710512478154" duration="10153000" />
     </task>
     <task id="LOCAL-00001" summary="Ah here we go again.">
       <option name="closed" value="true" />
@@ -374,7 +368,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710178567335</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="RolesAdded">
+      <option name="closed" value="true" />
+      <created>1710351401814</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1710351401814</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -411,16 +413,16 @@
     <MESSAGE value="News" />
     <MESSAGE value="NewsUpdateTry" />
     <MESSAGE value="SingleNewPreview+AuthorNameAdnAvatarOutput" />
-    <option name="LAST_COMMIT_MESSAGE" value="SingleNewPreview+AuthorNameAdnAvatarOutput" />
+    <MESSAGE value="RolesAdded" />
+    <option name="LAST_COMMIT_MESSAGE" value="RolesAdded" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-field">
-          <url>file://$PROJECT_DIR$/src/main/java/step/learning/servlets/HomeServlet.java</url>
-          <line>19</line>
-          <properties field="logger" class="step.learning.servlets.HomeServlet" />
-          <option name="timeStamp" value="1" />
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/step/learning/servlets/NewsServlet.java</url>
+          <line>42</line>
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -428,6 +430,7 @@
       <configuration name="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory">
         <watch expression="new File(&quot;.&quot;).getAbsolutePath()" language="JAVA" custom="java.io.File" />
         <watch expression="req.getServletContext().getRealPath(&quot;/&quot;)" language="JAVA" custom="java.io.File" />
+        <watch expression="req.getParameterMap()" language="JAVA" />
       </configuration>
     </watches-manager>
   </component>

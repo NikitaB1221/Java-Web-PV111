@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    var elems = document.querySelectorAll('.modal');
+    let elems = document.querySelectorAll('.modal');
     M.Modal.init(elems, {
         onCloseEnd: onAuthModalClosed
     });
@@ -15,6 +15,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const newsImgFileInput = document.getElementById("news-file");
     if (newsImgFileInput) newsImgFileInput.onchange = newsImgChange;
+
+    for (let a of document.querySelectorAll("[data-news-id]")){
+        a.addEventListener('click', deleteNewsClick);
+    }
 });
 
 function newsImgChange(e) {
@@ -28,6 +32,20 @@ function newsImgChange(e) {
     }
 }
 
+function deleteNewsClick(e){
+    const newsId = e.target.closest("[data-news-id]").getAttribute("data-news-id")
+    if (!newsId){
+        alert("Empty news id? Call moder!");
+        return;
+    }
+    const appContext = window.location.pathname.split('/')[1];
+    let url = `/${appContext}/news/?id=${newsId}`;
+    console.log(url);
+    fetch(url, {
+        method: 'DELETE'
+    }).then(r => r.json()).then(console.log);
+// console.log(newsId);
+}
 function newsSubmitClick() { // hoisting
     const newsTitle = document.getElementById("news-title");
     if (!newsTitle) throw "Element #news-title not found"

@@ -8,6 +8,7 @@ import org.apache.commons.fileupload.FileItem;
 import step.learning.dal.NewsDao;
 import step.learning.dal.UserDao;
 import step.learning.entity.News;
+import step.learning.entity.User;
 import step.learning.services.form_parse.FormParseResult;
 import step.learning.services.form_parse.FormParseService;
 
@@ -38,23 +39,46 @@ public class NewsServlet extends HttpServlet {
     }
 
     @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String newsId = req.getParameter("id");
+        if (newsId == null || newsId.isEmpty()) {
+            sendRest(resp, "error", "Missing or invalid data: 'newsId'. Must not null");
+            return;
+        }
+        if(newsDao.deleteNews (newsId)) {
+            sendRest (resp, "success", "News deleted");
+        }
+        else {
+            sendRest (resp, "error", "Internal error.");
+        }
+    }
+    boolean canDelete = false;
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setAttribute( "create-status",
+        req.setAttribute("create-status",
                 newsDao.installTable()
                         ? "Success"
                         : "Error");
-        String pathInfo = req.getPathInfo();
-        if ("/".equals(pathInfo)){
-            req.setAttribute( "news", newsDao.getAll());
-            req.setAttribute( "userDaoObj", userDao);
-            req.setAttribute("page-body", "news.jsp");
+        User user = (User) req.getAttribute("auth-user");
+        if(user != null) {
+            req.setAttribute("can-create",
+                    user.getRoles().stream().anyMatch (role -> role.getCanCreate() == 1));
+            req.setAttribute("can-update",
+                    user.getRoles().stream().anyMatch(role -> role.getCanUpdate() == 1));
+            canDelete = user.getRoles().stream().anyMatch(role -> role.getCanDelete() == 1);
+            req.setAttribute("can-delete", canDelete);
         }
-        else {
+        String pathInfo = req.getPathInfo();
+        if ("/".equals(pathInfo)) {
+            req.setAttribute("news", newsDao.getAll(canDelete));
+            req.setAttribute("userDaoObj", userDao);
+            req.setAttribute("page-body", "news.jsp");
+        } else {
             News news = newsDao.getById(pathInfo.substring(1));
             if (news != null) {
-                req.setAttribute( "news_detail", news);
+                req.setAttribute("news_detail", news);
             }
-            req.setAttribute( "userDaoObj", userDao);
+            req.setAttribute("userDaoObj", userDao);
             req.setAttribute("page-body", "news_detail.jsp");
         }
 

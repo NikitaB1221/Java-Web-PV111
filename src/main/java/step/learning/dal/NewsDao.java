@@ -43,22 +43,41 @@ public class NewsDao {
         return false;
     }
 
-    public News getById( String id ) {
-        String sql = "SELECT * FROM News WHERE id=?" ;
-        try( PreparedStatement prep = dbService.getConnection().prepareStatement(sql) ) {
+    public boolean deleteNews(String id) {
+        String sql = "UPDATE News SET deleted_dt = CURRENT_TIMESTAMP WHERE id=?";
+        try (PreparedStatement prep = dbService.getConnection().prepareStatement(sql)) {
+            prep.setString(1, id);
+            prep.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, ex.getMessage() + " -- " + sql);
+        }
+        return false;
+    }
+
+    public News getById(String id) {
+        String sql = "SELECT * FROM News WHERE id=?";
+        try (PreparedStatement prep = dbService.getConnection().prepareStatement(sql)) {
             prep.setString(1, id);
             ResultSet res = prep.executeQuery();
-            return res.next() ?  News.FromResultSet(res) : null ;
+            return res.next() ? News.FromResultSet(res) : null;
+        } catch (SQLException ex) {
+            logger.log(Level.SEVERE, ex.getMessage() + " -- " + sql);
         }
-        catch( SQLException ex ) {
-            logger.log( Level.SEVERE, ex.getMessage() + " -- " + sql );
-        }
-        return null ;
+        return null;
     }
 
     public List<News> getAll() {
+        return getAll(false);
+    }
+
+    public List<News> getAll(boolean withDeleted) {
         List<News> ret = new ArrayList<>();
         String sql = "SELECT * FROM News";
+        if (!withDeleted) {
+            sql += " WHERE deleted_dt IS NULL";
+        }
+
         try (Statement statement = dbService.getConnection().createStatement()) {
             ResultSet res = statement.executeQuery(sql);
             while (res.next()) {

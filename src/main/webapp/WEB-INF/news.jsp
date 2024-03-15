@@ -4,6 +4,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="step.learning.dal.NewsDao" %>
 <%@ page import="step.learning.dal.UserDao" %>
+<%@ page import="java.util.Objects" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%
     String contextPath = request.getContextPath();
@@ -15,7 +16,7 @@
 <h1>Новини</h1>
 
 <% for (News n : news) { %>
-<div class="col s12 m7">
+<div class="col s12 m7" style="opacity: <%= n.getDeleteDt() == null ? 1 : .5%>">
     <div class="card horizontal">
         <div class="card-image" style="flex: 1">
             <img src="<%=contextPath%>/upload/news/<%=n.getImageUrl()%>" alt="img"/>
@@ -40,6 +41,12 @@
                 </small>
             </div>
             <div class="card-action">
+                <% if( Objects.equals( request.getAttribute("can-delete"), true ) ) {
+                    if(n.getDeleteDt() == null) { %>
+                <a href="#" class="right" data-news-id="<%=n.getId()%>"><i class="material-icons prefix">delete_forever</i></a>
+                <% } else { %>
+                <a href="#" class="right" data-news-restore-id="<%=n.getId()%>"><i class="material-icons prefix">restore_from_trash</i></a>
+                <% } } %>
                 <a href="<%=contextPath%>/news/<%=n.getId()%>">Reed more...</a>
             </div>
         </div>
@@ -48,7 +55,7 @@
 <% } %>
 
 <% if (user != null) { %>
-
+<% if (Objects.equals(request.getAttribute("can-create"), true)) {%>
 <p>
     Контроль таблицы: <%= request.getAttribute("create-status") %>
 </p>
@@ -97,4 +104,7 @@
     </div>
 </div>
 
+<% } else {%>
+<div class="card-panel yellow darken-4">You have no right to create news</div>
+<% } %>
 <% } %>
