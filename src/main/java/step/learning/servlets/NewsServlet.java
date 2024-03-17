@@ -78,6 +78,7 @@ public class NewsServlet extends HttpServlet {
             if (news != null) {
                 req.setAttribute("news_detail", news);
             }
+            req.setAttribute("news", newsDao.getAll(canDelete));
             req.setAttribute("userDaoObj", userDao);
             req.setAttribute("page-body", "news_detail.jsp");
         }

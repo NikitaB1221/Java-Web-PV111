@@ -48,6 +48,7 @@
                 <a href="#" class="right" data-news-restore-id="<%=n.getId()%>"><i class="material-icons prefix">restore_from_trash</i></a>
                 <% } } %>
                 <a href="<%=contextPath%>/news/<%=n.getId()%>">Reed more...</a>
+                <br>
             </div>
         </div>
     </div>
