@@ -39,7 +39,7 @@ public class UserDao {
     public User getUserById(UUID id) {
         String sql = "SELECT * FROM Users WHERE id = ? LIMIT 1";
 
-        try (Connection conn = dbService.getConnection(); PreparedStatement prep = conn.prepareStatement(sql)) {
+        try (PreparedStatement prep = dbService.getConnection().prepareStatement(sql)) {
             prep.setString(1, id.toString());
             ResultSet resultSet = prep.executeQuery();
             return resultSet.next() ? includeRoles(new User(resultSet)) : null;

@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+﻿document.addEventListener('DOMContentLoaded', function () {
     let elems = document.querySelectorAll('.modal');
     M.Modal.init(elems, {
         onCloseEnd: onAuthModalClosed
@@ -19,7 +19,42 @@ document.addEventListener('DOMContentLoaded', function () {
     for (let a of document.querySelectorAll("[data-news-id]")){
         a.addEventListener('click', deleteNewsClick);
     }
+    for (let a of document.querySelectorAll("[data-news-restore-id]")){
+        a.addEventListener('click', restoreNewsClick);
+    }
+    const newsCommentButton = document.getElementById("news-comment-button");
+
+    function newsCommentClick() {
+        const dataId = document.querySelector("[data-news-edit-id]");
+        if(! dataId) throw "[data-news-edit-id] not found";
+        const newsId= dataId.getAttribute("data-news-edit-id");
+        if(! newsId) throw "New id attribute is empty";
+        const commentInput = document.getElementById("news-comment-text");
+        if(! commentInput) throw "#news-comment-text not found";
+        const comment = commentInput.value.trim();
+        if(comment.length <= 5) {
+            alert("Коментар занадто короткий");
+            return;
+        }
+        const userIdInput = document.getElementById("news-comment-user-id");
+        if(! userIdInput) throw "#news-comment-user-id not found";
+        const userId = userIdInput.value;
+        const appContext = window.location.pathname.split('/')[1];
+        fetch(`/${appContext}/comment`, {
+        method: 'POST',
+        headers: {
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify({
+            newsId, userId, comment
+        })
+    }).then(r => r.json()).then(console.log);
+    }
+
+    if (newsCommentButton) newsCommentButton.addEventListener('click', newsCommentClick);
 });
+
+
 
 function newsImgChange(e) {
     const [file] = e.target.files;
@@ -43,9 +78,35 @@ function deleteNewsClick(e){
     console.log(url);
     fetch(url, {
         method: 'DELETE'
-    }).then(r => r.json()).then(console.log);
-// console.log(newsId);
+    }).then(r => r.json()).then(j => {
+        if (j.status !== "success") {
+            alert("Помилка сервера");
+        } else {
+            window.location.reload();
+        }
+    });
 }
+function restoreNewsClick(e){
+    const newsId = e.target.closest("[data-news-restore-id]").getAttribute("data-news-restore-id")
+    if (!newsId){
+        alert("Empty news id? Call moder!");
+        return;
+    }
+    const appContext = window.location.pathname.split('/')[1];
+    let url = `/${appContext}/news/?id=${newsId}`;
+    console.log(url);
+    fetch(url, {
+        method: 'RESTORE'
+    }).then(r => r.json()).then(j => {
+        if (j.status !== "success") {
+            alert("Помилка сервера");
+        } else {
+            window.location.reload();
+        }
+    });
+}
+
+
 function newsSubmitClick() { // hoisting
     const newsTitle = document.getElementById("news-title");
     if (!newsTitle) throw "Element #news-title not found"
@@ -159,3 +220,37 @@ function authButtonClick() {
         });
 }
 
+function newsEditClick(){
+    const editables = document.querySelectorAll(`[data-editable="true"]`);
+    if(editables.length === 0){
+        return;
+    }
+    const isEdit = editables[0].getAttribute("contenteditable");
+    if(isEdit) { // другий натиск кнопки, елементи вже редагуються
+        let formData = new FormData();
+        for(let element of editables ) {
+            element.removeAttribute("contenteditable");
+            if(element.getAttribute("initial-content") !== element.innerText) {
+                console.log("Changes in " + element.getAttribute("data-parameter"));
+                formData.append(element.getAttribute("data-parameter"), element.innerText);
+            }
+        }
+        if([...formData.keys()].length !== null){
+            const dataId = document.querySelector("[data-news-edit-id]");
+            if (!dataId) throw "[data-news-edit-id] not found";
+            const newsId = dataId.getAttribute("data-news-edit-id");
+            if (!newsId) throw "New id attribute is empty"
+            const appContext = window.location.pathname.split('/')[1] ;
+            fetch(`/${appContext}/news/`, {
+                method: 'PUT',
+                body: formData
+            }).then(r => r.json()).then(console.log);
+        }
+    }
+    else{
+        for(let element of editables){
+            element.setAttribute("contenteditable",true);
+            element.setAttribute("initial-content", element.innerText);
+        }
+    }
+}

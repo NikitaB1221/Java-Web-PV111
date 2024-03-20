@@ -14,7 +14,7 @@ public class EncodingFilter implements Filter {
     private FilterConfig filterConfig;
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
+        this.filterConfig = filterConfig;
     }
 
     @Override
@@ -28,7 +28,6 @@ public class EncodingFilter implements Filter {
             // Пропустить фильтрацию для этих путей
             chain.doFilter(request, response);
         } else {
-            // Установить кодировку символов для всех остальных запросов и ответов
             httpRequest.setCharacterEncoding("UTF-8");
             httpResponse.setCharacterEncoding("UTF-8");
             chain.doFilter(httpRequest, httpResponse);

@@ -5,8 +5,10 @@ import com.google.gson.JsonObject;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import org.apache.commons.fileupload.FileItem;
+import step.learning.dal.CommentDao;
 import step.learning.dal.NewsDao;
 import step.learning.dal.UserDao;
+import step.learning.entity.Comment;
 import step.learning.entity.News;
 import step.learning.entity.User;
 import step.learning.services.form_parse.FormParseResult;
@@ -27,13 +29,15 @@ import java.util.logging.Logger;
 public class NewsServlet extends HttpServlet {
     private final UserDao userDao;
     private final NewsDao newsDao;
+    private final CommentDao commentDao;
     private final FormParseService formParseService;
     private final Logger logger;
 
     @Inject
-    public NewsServlet(UserDao userDao, NewsDao newsDao, UserDao userDao1, FormParseService formParseService, Logger logger) {
+    public NewsServlet(UserDao userDao, NewsDao newsDao, UserDao userDao1, CommentDao commentDao, FormParseService formParseService, Logger logger) {
         this.userDao = userDao1;
         this.newsDao = newsDao;
+        this.commentDao = commentDao;
         this.formParseService = formParseService;
         this.logger = logger;
     }
@@ -46,6 +50,29 @@ public class NewsServlet extends HttpServlet {
             return;
         }
         if(newsDao.deleteNews (newsId)) {
+            sendRest (resp, "success", "News deleted");
+        }
+        else {
+            sendRest (resp, "error", "Internal error.");
+        }
+    }
+
+    @Override
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        switch (req.getMethod()){
+            case "RESTORE": doRestore(req, resp);
+                break;
+            default: super.service(req,resp);
+        }
+    }
+
+    protected void doRestore(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String newsId = req.getParameter("id");
+        if (newsId == null || newsId.isEmpty()) {
+            sendRest(resp, "error", "Missing or invalid data: 'newsId'. Must not null");
+            return;
+        }
+        if(newsDao.restoreNews (newsId)) {
             sendRest (resp, "success", "News deleted");
         }
         else {
@@ -77,6 +104,7 @@ public class NewsServlet extends HttpServlet {
             News news = newsDao.getById(pathInfo.substring(1));
             if (news != null) {
                 req.setAttribute("news_detail", news);
+                req.setAttribute("news_comments", commentDao.getNewsComment(news).toArray(new Comment[0]));
             }
             req.setAttribute("news", newsDao.getAll(canDelete));
             req.setAttribute("userDaoObj", userDao);
@@ -85,6 +113,22 @@ public class NewsServlet extends HttpServlet {
 
         req.getRequestDispatcher("../WEB-INF/_layout.jsp")  // перенаправлення (внутрішнє)
                 .forward(req, resp);
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        FormParseResult formParseResult;
+        try {
+            formParseResult = formParseService.parse(req);
+        }
+        catch
+        (ParseException ex) {
+            logger.log(Level.SEVERE, ex.getMessage());
+            sendRest(resp, "error", "Data composition error");
+            return;
+        }
+        Map<String, String> fields = formParseResult.getFields();
+        sendRest(resp, String.join(",", fields.keySet()), String.join(",", fields.values()));
     }
 
     @Override

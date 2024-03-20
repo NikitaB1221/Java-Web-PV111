@@ -16,3 +16,7 @@ img.avatar {
     height: 40px;
     vertical-align: middle;
 }
+img.newsImage {
+    float: left;
+    max-height: 25vh;
+}
