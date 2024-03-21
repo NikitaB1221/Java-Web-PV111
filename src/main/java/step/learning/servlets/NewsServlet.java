@@ -121,13 +121,18 @@ public class NewsServlet extends HttpServlet {
         try {
             formParseResult = formParseService.parse(req);
         }
-        catch
-        (ParseException ex) {
+        catch (ParseException ex) {
             logger.log(Level.SEVERE, ex.getMessage());
             sendRest(resp, "error", "Data composition error");
             return;
         }
         Map<String, String> fields = formParseResult.getFields();
+
+        if (fields.size() <= 1 && fields.containsKey("id")) {
+            sendRest(resp, "error", "At least one field other than ID must be provided for update.");
+            return;
+        }
+
         sendRest(resp, String.join(",", fields.keySet()), String.join(",", fields.values()));
     }
 

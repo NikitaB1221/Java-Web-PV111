@@ -105,8 +105,6 @@ function restoreNewsClick(e){
         }
     });
 }
-
-
 function newsSubmitClick() { // hoisting
     const newsTitle = document.getElementById("news-title");
     if (!newsTitle) throw "Element #news-title not found"
@@ -176,14 +174,12 @@ function newsSubmitClick() { // hoisting
     }
 
 }
-
 function onAuthModalClosed() {
     const [authEmailInput, authPasswordInput, authMessage] = getAuthElements();
     authEmailInput.innerText = "";
     authPasswordInput.innerText = "";
     authMessage.innerText = "";
 }
-
 function getAuthElements() {
     const authEmailInput = document.getElementById("auth-email");
     if (!authEmailInput) throw "Element '#auth-email' not found";
@@ -193,7 +189,6 @@ function getAuthElements() {
     if (!authMessage) throw "Element '.auth-message' not found";
     return [authEmailInput, authPasswordInput, authMessage]
 }
-
 function authButtonClick() {
 
     const [authEmailInput, authPasswordInput, authMessage] = getAuthElements();
@@ -226,7 +221,7 @@ function newsEditClick(){
         return;
     }
     const isEdit = editables[0].getAttribute("contenteditable");
-    if(isEdit) { // другий натиск кнопки, елементи вже редагуються
+    if(isEdit) {
         let formData = new FormData();
         for(let element of editables ) {
             element.removeAttribute("contenteditable");
@@ -235,7 +230,7 @@ function newsEditClick(){
                 formData.append(element.getAttribute("data-parameter"), element.innerText);
             }
         }
-        if([...formData.keys()].length !== null){
+        if([...formData.keys()].length > 1 || (![...formData.keys()].includes("id") && [...formData.keys()].length > 0)){
             const dataId = document.querySelector("[data-news-edit-id]");
             if (!dataId) throw "[data-news-edit-id] not found";
             const newsId = dataId.getAttribute("data-news-edit-id");
@@ -245,6 +240,8 @@ function newsEditClick(){
                 method: 'PUT',
                 body: formData
             }).then(r => r.json()).then(console.log);
+        } else {
+            alert("At least one field other than ID must be provided for update.");
         }
     }
     else{
@@ -254,3 +251,4 @@ function newsEditClick(){
         }
     }
 }
+
