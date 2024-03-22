@@ -16,44 +16,50 @@
     const newsImgFileInput = document.getElementById("news-file");
     if (newsImgFileInput) newsImgFileInput.onchange = newsImgChange;
 
-    for (let a of document.querySelectorAll("[data-news-id]")){
+    for (let a of document.querySelectorAll("[data-news-id]")) {
         a.addEventListener('click', deleteNewsClick);
     }
-    for (let a of document.querySelectorAll("[data-news-restore-id]")){
+    for (let a of document.querySelectorAll("[data-news-restore-id]")) {
         a.addEventListener('click', restoreNewsClick);
     }
     const newsCommentButton = document.getElementById("news-comment-button");
 
     function newsCommentClick() {
         const dataId = document.querySelector("[data-news-edit-id]");
-        if(! dataId) throw "[data-news-edit-id] not found";
-        const newsId= dataId.getAttribute("data-news-edit-id");
-        if(! newsId) throw "New id attribute is empty";
+        if (!dataId) throw "[data-news-edit-id] not found";
+        const newsId = dataId.getAttribute("data-news-edit-id");
+        if (!newsId) throw "New id attribute is empty";
         const commentInput = document.getElementById("news-comment-text");
-        if(! commentInput) throw "#news-comment-text not found";
+        if (!commentInput) throw "#news-comment-text not found";
         const comment = commentInput.value.trim();
-        if(comment.length <= 5) {
+        if (comment.length <= 5) {
             alert("Коментар занадто короткий");
             return;
         }
         const userIdInput = document.getElementById("news-comment-user-id");
-        if(! userIdInput) throw "#news-comment-user-id not found";
+        if (!userIdInput) throw "#news-comment-user-id not found";
         const userId = userIdInput.value;
         const appContext = window.location.pathname.split('/')[1];
         fetch(`/${appContext}/comment`, {
-        method: 'POST',
-        headers: {
-            'Content-Type':'application/json'
-        },
-        body: JSON.stringify({
-            newsId, userId, comment
-        })
-    }).then(r => r.json()).then(console.log);
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                newsId, userId, comment
+            })
+        }).then(r => r.json()).then(r => r.json()).then(j => {
+            console.log(j);
+            if (j.status !== "success") {
+                alert(" Ошибка сервера");
+            } else {
+                window.location.reload();
+            }
+        });
     }
 
     if (newsCommentButton) newsCommentButton.addEventListener('click', newsCommentClick);
 });
-
 
 
 function newsImgChange(e) {
@@ -67,9 +73,9 @@ function newsImgChange(e) {
     }
 }
 
-function deleteNewsClick(e){
+function deleteNewsClick(e) {
     const newsId = e.target.closest("[data-news-id]").getAttribute("data-news-id")
-    if (!newsId){
+    if (!newsId) {
         alert("Empty news id? Call moder!");
         return;
     }
@@ -86,9 +92,10 @@ function deleteNewsClick(e){
         }
     });
 }
-function restoreNewsClick(e){
+
+function restoreNewsClick(e) {
     const newsId = e.target.closest("[data-news-restore-id]").getAttribute("data-news-restore-id")
-    if (!newsId){
+    if (!newsId) {
         alert("Empty news id? Call moder!");
         return;
     }
@@ -105,6 +112,7 @@ function restoreNewsClick(e){
         }
     });
 }
+
 function newsSubmitClick() { // hoisting
     const newsTitle = document.getElementById("news-title");
     if (!newsTitle) throw "Element #news-title not found"
@@ -174,12 +182,14 @@ function newsSubmitClick() { // hoisting
     }
 
 }
+
 function onAuthModalClosed() {
     const [authEmailInput, authPasswordInput, authMessage] = getAuthElements();
     authEmailInput.innerText = "";
     authPasswordInput.innerText = "";
     authMessage.innerText = "";
 }
+
 function getAuthElements() {
     const authEmailInput = document.getElementById("auth-email");
     if (!authEmailInput) throw "Element '#auth-email' not found";
@@ -189,6 +199,7 @@ function getAuthElements() {
     if (!authMessage) throw "Element '.auth-message' not found";
     return [authEmailInput, authPasswordInput, authMessage]
 }
+
 function authButtonClick() {
 
     const [authEmailInput, authPasswordInput, authMessage] = getAuthElements();
@@ -215,38 +226,44 @@ function authButtonClick() {
         });
 }
 
-function newsEditClick(){
+function newsEditClick() {
     const editables = document.querySelectorAll(`[data-editable="true"]`);
-    if(editables.length === 0){
+    if (editables.length === 0) {
         return;
     }
     const isEdit = editables[0].getAttribute("contenteditable");
-    if(isEdit) {
+    if (isEdit) {
         let formData = new FormData();
-        for(let element of editables ) {
+        for (let element of editables) {
             element.removeAttribute("contenteditable");
-            if(element.getAttribute("initial-content") !== element.innerText) {
+            if (element.getAttribute("initial-content") !== element.innerText) {
                 console.log("Changes in " + element.getAttribute("data-parameter"));
                 formData.append(element.getAttribute("data-parameter"), element.innerText);
             }
         }
-        if([...formData.keys()].length > 1 || (![...formData.keys()].includes("id") && [...formData.keys()].length > 0)){
+        if ([...formData.keys()].length > 1 || (![...formData.keys()].includes("id") && [...formData.keys()].length > 0)) {
             const dataId = document.querySelector("[data-news-edit-id]");
             if (!dataId) throw "[data-news-edit-id] not found";
             const newsId = dataId.getAttribute("data-news-edit-id");
             if (!newsId) throw "New id attribute is empty"
-            const appContext = window.location.pathname.split('/')[1] ;
+            const appContext = window.location.pathname.split('/')[1];
             fetch(`/${appContext}/news/`, {
                 method: 'PUT',
                 body: formData
-            }).then(r => r.json()).then(console.log);
+            }).then(r => r.json()).then(j => {
+                console.log(j);
+                if (j.status !== "success") {
+                    alert("Помилка сервера");
+                } else {
+                    window.location.reload();
+                }
+            });
         } else {
             alert("At least one field other than ID must be provided for update.");
         }
-    }
-    else{
-        for(let element of editables){
-            element.setAttribute("contenteditable",true);
+    } else {
+        for (let element of editables) {
+            element.setAttribute("contenteditable", true);
             element.setAttribute("initial-content", element.innerText);
         }
     }

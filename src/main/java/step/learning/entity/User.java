@@ -18,7 +18,14 @@ public class User {
     private List<Role> roles;
 
     public User(ResultSet resultSet) throws SQLException {
-        setId(UUID.fromString(resultSet.getString("id")));
+        String id;
+        try {
+            id = resultSet.getString("user_id");
+        }
+        catch(Exception ignore) {
+            id = resultSet.getString("id");
+        }
+        setId( UUID.fromString(id));
         setName(resultSet.getString("name"));
         setPhone(resultSet.getString("phone"));
         setEmail(resultSet.getString("email"));

@@ -9,9 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="cc95bbae-e1eb-48d7-9373-8367ba54b9ef" name="Changes" comment="Comment">
+    <list default="true" id="cc95bbae-e1eb-48d7-9373-8367ba54b9ef" name="Changes" comment="CommentValidation">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/servlets/NewsServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/servlets/NewsServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/dal/CommentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/dal/CommentDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/entity/Comment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/entity/Comment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/step/learning/servlets/CommentServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/step/learning/servlets/CommentServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/news_detail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/news_detail.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/site.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/site.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/js/site.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/js/site.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -227,7 +232,8 @@
       <workItem from="1710713658206" duration="957000" />
       <workItem from="1710773228505" duration="9932000" />
       <workItem from="1710946307497" duration="10229000" />
-      <workItem from="1711027057399" duration="1330000" />
+      <workItem from="1711027057399" duration="1533000" />
+      <workItem from="1711115904341" duration="10146000" />
     </task>
     <task id="LOCAL-00001" summary="Ah here we go again.">
       <option name="closed" value="true" />
@@ -405,7 +411,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710956824146</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="CommentValidation">
+      <option name="closed" value="true" />
+      <created>1711028524594</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1711028524594</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -446,7 +460,8 @@
     <MESSAGE value="RolesUpdate" />
     <MESSAGE value="Marquee" />
     <MESSAGE value="Comment" />
-    <option name="LAST_COMMIT_MESSAGE" value="Comment" />
+    <MESSAGE value="CommentValidation" />
+    <option name="LAST_COMMIT_MESSAGE" value="CommentValidation" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

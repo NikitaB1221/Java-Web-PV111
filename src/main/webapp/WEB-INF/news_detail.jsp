@@ -3,6 +3,8 @@
 <%@ page import="java.util.Objects" %>
 <%@ page import="step.learning.entity.User" %>
 <%@ page import="step.learning.entity.Comment" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String contextPath = request.getContextPath();
@@ -21,7 +23,11 @@
             : news.getText();
 
     boolean canUpdate = Objects.equals(true, request.getAttribute("can-update"));/*(boolean) request.getAttribute("can-update");*/
+    SimpleDateFormat dateFormatter = new SimpleDateFormat("HH:mm dd.MM.yyyy");
+    SimpleDateFormat timeFormatter = new SimpleDateFormat("HH:mm");
 %>
+<link rel="stylesheet" href="<%=contextPath%>/css/site.css"/>
+
 <% if (canUpdate) {%>
     <button class="btn-floating btn-large waves-effect waves-light red accent-2"
     onclick="newsEditClick()" style="position: fixed; right: 5px; top: 15vh"><i class="material-icons">edit</i></button>
@@ -41,8 +47,29 @@
 </h5>
 <br>
 
-<%for (Comment comment : comments) {%>
-    <p><%=comment.getText()%></p>
+<% for(Comment comment : comments ) { %>
+<div class="comment">
+    <div class="date">
+        <%
+            Date date = comment.getCreateDt();
+            String strDate;
+            if (dateFormatter.format(date).substring(6, 16).equals(dateFormatter.format(new Date()).substring(6, 16))) {
+                strDate = timeFormatter.format(date);
+            } else {
+                strDate = dateFormatter.format(date);
+            }
+        %>
+        <%= strDate %>
+    </div>
+    <div class="user-info">
+        <img src="<%= comment.getUser() != null && comment.getUser().getFilename() != null ? contextPath + "/upload/avatar/" + comment.getUser().getFilename() : contextPath + "/upload/avatar/NoImage.png" %>"
+             alt="User Avatar" class="avatar">
+        <h5><%= comment.getUser() == null ? "--" : comment.getUser().getName() %></h5>
+    </div>
+    <div class="comment-text">
+        <p><%= comment.getText() %></p>
+    </div>
+</div>
 <% } %>
 
 <% if (user != null) {%>

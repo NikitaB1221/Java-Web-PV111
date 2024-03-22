@@ -20,3 +20,25 @@ img.newsImage {
     float: left;
     max-height: 25vh;
 }
+.comment {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+.user-info {
+    display: flex;
+    align-items: center;
+}
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.date {
+    color: #888;
+    float: right;
+
+}
